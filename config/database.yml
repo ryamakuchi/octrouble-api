@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: octrouble_api_production
-  username: octrouble_api
-  password: <%= ENV['OCTROUBLE_API_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
