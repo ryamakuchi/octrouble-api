@@ -2,7 +2,7 @@ class Sample
   include ActiveModel::Model
 
   URL_REGEXP = /github\.com\/[\w-]+\/[\w-]+/
-  REPOSITORY_REGEXP = /[\w-]+\/[\w-]+/
+  REPOSITORY_REGEXP = /\A[\w-]+\/[\w-]+\z/
 
   attr_accessor :url
   attr_reader :message
@@ -12,8 +12,17 @@ class Sample
   def issues
     repo = url_check
     return message = '正しいリポジトリを指定してください' if repo.nil?
-    puts "repo: #{repo}"
-    `bundle exec octrouble issues #{repo}`
+
+    result = `bundle exec octrouble issues #{repo}`
+
+    if result.include?('Issue is not found.') and result[0] != '"'
+      return message = "#{repo} の Issues は 0件です"
+
+    elsif result.include?("Repository '#{repo}' is not found.") and result[0] != '"'
+      return message = "#{repo} リポジトリが見つかりません"
+    end
+
+    result
   end
 
   private

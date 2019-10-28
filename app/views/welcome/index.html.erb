@@ -27,15 +27,16 @@
   <%= submit_tag('Search', name: nil) %>
 <% end %>
 
-<p>
-  <%= @message %>
-</p>
-
 <% if @url.present? %>
   <h3>
     <%= @url %>
     <span>の検索結果</span>
   </h3>
+
+  <p>
+    <%= @message %>
+  </p>
+
   <p>
     <%= simple_format(h(@result)) %>
   </p>
