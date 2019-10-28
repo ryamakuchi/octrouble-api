@@ -8,3 +8,25 @@
   </a>
   は GitHub API から Issue のデータを取得できる CLI アプリケーションです。
 </p>
+
+<h3>Octrouble を試してみる</h3>
+
+<p>
+  GitHub リポジトリの URL を入力して検索すると、該当のリポジトリの Issues が取得できます。
+</p>
+
+<%= form_tag('/', method: 'get') do %>
+  <%= label_tag(:url, 'Search Issues:') %>
+  <%= text_field_tag(:url) %>
+  <%= submit_tag('Search', name: nil) %>
+<% end %>
+
+<% if @url.present? %>
+  <p>
+    <%= @url %>
+    <span>の検索結果</span>
+  </p>
+  <p>
+    <%= simple_format(h(@result)) %>
+  </p>
+<% end %>
