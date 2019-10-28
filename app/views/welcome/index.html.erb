@@ -15,17 +15,27 @@
   GitHub リポジトリの URL を入力して検索すると、該当のリポジトリの Issues が取得できます。
 </p>
 
+<% if @url.blank? %>
+  <p>
+    検索したいリポジトリを入力してください（URL or user/repo）
+  </p>
+<% end %>
+
 <%= form_tag('/', method: 'get') do %>
-  <%= label_tag(:url, 'Search Issues:') %>
+  <%= label_tag(:url, '$ bundle exec octrouble issues') %>
   <%= text_field_tag(:url) %>
   <%= submit_tag('Search', name: nil) %>
 <% end %>
 
+<p>
+  <%= @message %>
+</p>
+
 <% if @url.present? %>
-  <p>
+  <h3>
     <%= @url %>
     <span>の検索結果</span>
-  </p>
+  </h3>
   <p>
     <%= simple_format(h(@result)) %>
   </p>
