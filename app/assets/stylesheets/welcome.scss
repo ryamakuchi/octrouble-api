@@ -106,11 +106,12 @@
   .input {
     width: 55%;
     display: inline-block;
-    background-color: rgba(#073642, 0.6);
+    background-color: transparent;
     border: none;
     font-family: 'Fira Code', monospace;
     font-size: 18px;
-    color: #839496;
+    color: #859900;
+    padding-left: 10px;
     outline: 0;
   }
 
