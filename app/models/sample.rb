@@ -12,7 +12,7 @@ class Sample
   def issues
     repo = url_check
     if repo.nil?
-      @message = '正しいリポジトリを指定してください'
+      @message = 'GitHub URL もしくは user/repo という形式で検索してください'
       return nil
     end
 

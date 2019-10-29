@@ -14,7 +14,7 @@
   <h2 class="h2">Octrouble を試してみる 🚀</h2>
 
   <p>
-    GitHub リポジトリを入力して検索すると、該当するリポジトリの Issues が CSV で取得できます。
+    GitHub リポジトリを入力して検索すると、該当するリポジトリの Issues を CSV で取得できます。
   </p>
 
   <% if @url.blank? %>
@@ -25,7 +25,7 @@
 
   <%= form_tag('/', method: 'get', class: 'search') do %>
     <%= label_tag(:url, '$ bundle exec octrouble issues') %>
-    <%= text_field_tag(:url, '', class: 'input', placeholder: ' rails/rails', autofocus: true) %>
+    <%= text_field_tag(:url, @url, class: 'input', placeholder: 'rails/rails', autofocus: true) %>
     <%= submit_tag('Search', name: nil, class: 'submit') %>
   <% end %>
 

@@ -42,10 +42,10 @@ describe Sample, type: :model do
       context 'user/repo や GitHub URL 以外の文字列が入力された場合' do
         subject(:sample) { Sample.new(url: 'https://rails/rails') }
 
-        it '正しいリポジトリを指定してください' do
+        it 'GitHub URL もしくは user/repo という形式で検索してください' do
           expect(sample.issues).to eq(nil)
           expect(sample.message).to eq(
-            '正しいリポジトリを指定してください'
+            'GitHub URL もしくは user/repo という形式で検索してください'
           )
         end
       end
