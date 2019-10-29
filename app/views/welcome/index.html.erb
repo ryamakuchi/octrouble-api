@@ -1,10 +1,50 @@
-<h2>Octrouble API</h2>
-<p>
-  <a
-    href="https://rubygems.org/gems/octrouble"
-    target="_blank"
-  >
-    Octrouble
-  </a>
-  は GitHub API から Issue のデータを取得できる CLI アプリケーションです。
-</p>
+<h1 class="h1">Octrouble API</h1>
+
+<section class="section">
+  <p class="description">
+    <a
+      href="https://rubygems.org/gems/octrouble"
+      target="_blank"
+    >
+      Octrouble
+    </a>
+    は GitHub API から Issue のデータを取得できる、Ruby 製の CLI アプリケーション（Gem）です。
+  </p>
+
+  <h2 class="h2">Octrouble を試してみる 🚀</h2>
+
+  <p>
+    GitHub リポジトリを入力して検索すると、該当するリポジトリの Issues が CSV で取得できます。
+  </p>
+
+  <% if @url.blank? %>
+    <p>
+      👇 検索したいリポジトリを入力してください（GitHub URL or user/repo）
+    </p>
+  <% end %>
+
+  <%= form_tag('/', method: 'get', class: 'search') do %>
+    <%= label_tag(:url, '$ bundle exec octrouble issues') %>
+    <%= text_field_tag(:url, '', class: 'input', placeholder: ' rails/rails', autofocus: true) %>
+    <%= submit_tag('Search', name: nil, class: 'submit') %>
+  <% end %>
+
+  <% if @url.present? %>
+    <div class="result-container">
+      <h3 class="h3">
+        <%= @url %>
+        の検索結果
+      </h3>
+
+      <% if @message.present? %>
+        <p class="message">
+          <%= @message %>
+        </p>
+      <% end %>
+
+      <div class="result">
+        <%= simple_format(h(@result)) %>
+      </div>
+    </div>
+  <% end %>
+</section>
