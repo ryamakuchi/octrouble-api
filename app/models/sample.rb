@@ -11,15 +11,18 @@ class Sample
 
   def issues
     repo = url_check
-    return message = '正しいリポジトリを指定してください' if repo.nil?
+    if repo.nil?
+      @message = '正しいリポジトリを指定してください'
+      return nil
+    end
 
-    result = `bundle exec octrouble issues #{repo}`
+    result = get_issues(repo)
 
-    if result.include?('Issue is not found.') and result[0] != '"'
-      return message = "#{repo} の Issues は 0件です"
+    if result.include?('Issue is not found.') && result[0] != '"'
+      @message = "#{repo} の Issues は 0件です"
 
-    elsif result.include?("Repository '#{repo}' is not found.") and result[0] != '"'
-      return message = "#{repo} リポジトリが見つかりません"
+    elsif result.include?("Repository '#{repo}' is not found.") && result[0] != '"'
+      @message = "#{repo} リポジトリが見つかりません"
     end
 
     result
@@ -39,5 +42,9 @@ class Sample
       repo = nil
     end
     repo
+  end
+
+  def get_issues(repo)
+    `bundle exec octrouble issues #{repo}`
   end
 end
