@@ -4,13 +4,10 @@ class Sample
   URL_REGEXP = /github\.com\/[\w-]+\/[\w-]+/
   REPOSITORY_REGEXP = /\A[\w-]+\/[\w-]+\z/
 
-  attr_accessor :url
   attr_reader :message
 
-  validates :url, presence: true
-
-  def issues
-    repo = url_check
+  def issues(url)
+    repo = url_check(url)
     if repo.nil?
       @message = 'GitHub URL もしくは user/repo という形式で検索してください'
       return nil
@@ -30,7 +27,7 @@ class Sample
 
   private
 
-  def url_check
+  def url_check(url)
     if url =~ URL_REGEXP
       repo = url.slice(URL_REGEXP).slice(11..-1)
       repo.chop if repo[-1] == '/'
