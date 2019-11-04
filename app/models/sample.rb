@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Sample
   include ActiveModel::Model
 
-  URL_REGEXP = /github\.com\/[\w-]+\/[\w-]+/
-  REPOSITORY_REGEXP = /\A[\w-]+\/[\w-]+\z/
+  URL_REGEXP = %r{github\.com/[\w-]+/[\w-]+}.freeze
+  REPOSITORY_REGEXP = %r{\A[\w-]+/[\w-]+\z}.freeze
 
   attr_reader :message
 
@@ -14,14 +16,7 @@ class Sample
     end
 
     result = get_issues(repo)
-
-    if result.include?('Issue is not found.') && result[0] != '"'
-      @message = "#{repo} の Issues は 0件です"
-
-    elsif result.include?("Repository '#{repo}' is not found.") && result[0] != '"'
-      @message = "#{repo} リポジトリが見つかりません"
-    end
-
+    message_check(result, repo)
     result
   end
 
@@ -39,6 +34,15 @@ class Sample
       repo = nil
     end
     repo
+  end
+
+  def message_check(result, repo)
+    if result.include?('Issue is not found.') && result[0] != '"'
+      @message = "#{repo} の Issues は 0件です"
+
+    elsif result.include?("Repository '#{repo}' is not found.") && result[0] != '"'
+      @message = "#{repo} リポジトリが見つかりません"
+    end
   end
 
   def get_issues(repo)

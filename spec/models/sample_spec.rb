@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 describe Sample, type: :model do
   describe '#issues' do
-    subject(:sample) { Sample.new() }
+    subject(:sample) { Sample.new }
 
     context 'Issues が取得できる場合' do
       before do
@@ -60,16 +62,18 @@ describe Sample, type: :model do
       context '該当の Issues が見つからなかった場合' do
         before do
           allow(sample).to receive(:get_issues).and_return(
-            "Octokit::NotFound\n" \
-            "GET https://api.github.com/repos/ryamakuchi/none/issues?page=1: 404 - Not Found // See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n" \
+            'Octokit::NotFound\n' \
+            'GET https://api.github.com/repos/ryamakuchi/none/issues?page=1: 404 - Not Found ' \
+            '// See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n' \
             "Repository 'ryamakuchi/none' is not found.\n"
           )
         end
 
         it 'user/repo リポジトリが見つかりません' do
           expect(sample.issues('ryamakuchi/none')).to eq(
-            "Octokit::NotFound\n" \
-            "GET https://api.github.com/repos/ryamakuchi/none/issues?page=1: 404 - Not Found // See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n" \
+            'Octokit::NotFound\n' \
+            'GET https://api.github.com/repos/ryamakuchi/none/issues?page=1: 404 - Not Found ' \
+            '// See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n' \
             "Repository 'ryamakuchi/none' is not found.\n"
           )
           expect(sample.message).to eq(
