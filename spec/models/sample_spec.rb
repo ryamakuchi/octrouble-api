@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe Sample, type: :model do
   describe '#issues' do
     context 'Issues が取得できる場合' do

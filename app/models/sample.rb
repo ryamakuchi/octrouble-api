@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class Sample
   include ActiveModel::Model
 
-  URL_REGEXP = /github\.com\/[\w-]+\/[\w-]+/
-  REPOSITORY_REGEXP = /\A[\w-]+\/[\w-]+\z/
+  URL_REGEXP = %r{github\.com/[\w-]+/[\w-]+}.freeze
+  REPOSITORY_REGEXP = %r{\A[\w-]+/[\w-]+\z}.freeze
 
   attr_accessor :url
   attr_reader :message
