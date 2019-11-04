@@ -70,8 +70,9 @@ describe Sample, type: :model do
       context '該当の Issues が見つからなかった場合' do
         before do
           allow(sample).to receive(:get_issues).and_return(
-            "Octokit::NotFound\n" \
-            "GET https://api.github.com/repos/ryamakuchi/octrouble/issues?page=1: 404 - Not Found // See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n" \
+            'Octokit::NotFound\n' \
+            'GET https://api.github.com/repos/ryamakuchi/octrouble/issues?page=1: 404 - Not Found ' \
+            '// See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n' \
             "Repository 'ryamakuchi/octrouble' is not found.\n"
           )
         end
@@ -80,8 +81,9 @@ describe Sample, type: :model do
 
         it 'user/repo リポジトリが見つかりません' do
           expect(sample.issues).to eq(
-            "Octokit::NotFound\n" \
-            "GET https://api.github.com/repos/ryamakuchi/octrouble/issues?page=1: 404 - Not Found // See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n" \
+            'Octokit::NotFound\n' \
+            'GET https://api.github.com/repos/ryamakuchi/octrouble/issues?page=1: 404 - Not Found ' \
+            '// See: https://developer.github.com/v3/issues/#list-issues-for-a-repository\n' \
             "Repository 'ryamakuchi/octrouble' is not found.\n"
           )
           expect(sample.message).to eq(

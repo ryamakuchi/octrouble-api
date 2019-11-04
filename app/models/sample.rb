@@ -19,14 +19,7 @@ class Sample
     end
 
     result = get_issues(repo)
-
-    if result.include?('Issue is not found.') && result[0] != '"'
-      @message = "#{repo} の Issues は 0件です"
-
-    elsif result.include?("Repository '#{repo}' is not found.") && result[0] != '"'
-      @message = "#{repo} リポジトリが見つかりません"
-    end
-
+    message_check(result, repo)
     result
   end
 
@@ -44,6 +37,15 @@ class Sample
       repo = nil
     end
     repo
+  end
+
+  def message_check(result, repo)
+    if result.include?('Issue is not found.') && result[0] != '"'
+      @message = "#{repo} の Issues は 0件です"
+
+    elsif result.include?("Repository '#{repo}' is not found.") && result[0] != '"'
+      @message = "#{repo} リポジトリが見つかりません"
+    end
   end
 
   def get_issues(repo)
