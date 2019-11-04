@@ -4,6 +4,7 @@ AllCops:
   Exclude:
     - 'node_modules/**/*'
     - 'vendor/**/*'
+    - 'bin/*'
 Metrics/LineLength:
   Max: 120
 Style/Documentation:
