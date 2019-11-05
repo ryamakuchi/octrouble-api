@@ -10,6 +10,7 @@ require File.expand_path('../config/environment', __dir__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 
 require 'rspec/rails'
+require 'capybara/rails'
 require 'capybara/rspec'
 
 Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
@@ -25,7 +26,7 @@ end
 
 RSpec.configure do |config|
   config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+    driven_by :rack_test
   end
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

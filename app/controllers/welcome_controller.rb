@@ -5,8 +5,8 @@ class WelcomeController < ApplicationController
     return if params[:url].blank?
 
     @url = params[:url]
-    sample = Sample.new(url: @url)
-    @result = sample.issues
+    sample = Sample.new
+    @result = sample.issues(@url)
     @message = sample.message if sample.message.present?
   end
 end
